@@ -22,10 +22,10 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
         super.viewDidLoad()
         self.setupUI()
         self.setupData()
-        self.configView()
+        self.configPageView()
     }
     
-    private func configView() {
+    private func configPageView() {
         pageViewController = CustomPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.customDelegate = self
         
@@ -68,6 +68,7 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
     }
     
     @IBAction func actionAdd(_ sender: Any) {
+        self.activityIndicator.startAnimating()
         self.viewModel.addNewData()
         if self.pageViewController.controllers.count < self.viewModel.pageNumber {
             //add new page
@@ -91,6 +92,10 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
         }
         self.pageControl.numberOfPages = self.viewModel.pageNumber
         self.pageControl.currentPage = self.viewModel.pageNumber - 1
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1200)) {
+            self.activityIndicator.stopAnimating()
+        }
     }
         
     @IBAction func actionReloadAll(_ sender: Any) {
@@ -100,7 +105,7 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
         self.pageViewController.setViewControllers([UIViewController()], direction: .forward, animated: true, completion: nil)
         self.activityIndicator.startAnimating()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1200)) {
             self.pageViewController.controllers.removeAll()
             self.viewModel.parseImageDatePerPage()
             for i in 0 ..< self.viewModel.pageNumber {
@@ -109,10 +114,11 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
                 self.pageViewController.controllers.append(vc)
             }
             
-            self.pageViewController.setViewControllers([self.pageViewController.controllers.first!], direction: .reverse, animated: true, completion: nil)
-            self.activityIndicator.stopAnimating()
-            self.pageControl.numberOfPages = self.viewModel.pageNumber
-            self.pageControl.currentPage = 0
+            self.pageViewController.setViewControllers([self.pageViewController.controllers.first!], direction: .reverse, animated: true, completion: { _ in
+                self.activityIndicator.stopAnimating()
+                self.pageControl.numberOfPages = self.viewModel.pageNumber
+                self.pageControl.currentPage = 0
+            })
         }
     }
 }
