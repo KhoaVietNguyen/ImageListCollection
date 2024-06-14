@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageViewController" customModule="ImageListCollection" customModuleProvider="target">
+            <connections>
+                <outlet property="btnAdd" destination="CvH-4v-gLk" id="ORn-Pn-697"/>
+                <outlet property="btnReload" destination="ZIb-W4-NEt" id="tFW-pr-VsF"/>
+                <outlet property="pageControl" destination="NZb-Ym-W4g" id="kfx-tC-QvI"/>
+                <outlet property="pageView" destination="vxo-Lv-zyD" id="8XA-N6-teM"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oDE-KW-Dqp">
+                    <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CvH-4v-gLk">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <color key="tintColor" systemColor="tintColor"/>
+                            <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="5"/>
+                            <state key="normal" image="plus" catalog="system"/>
+                            <connections>
+                                <action selector="actionAdd:" destination="-1" eventType="touchUpInside" id="6Ru-b9-bzP"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIb-W4-NEt">
+                            <rect key="frame" x="293" y="0.0" width="100" height="44"/>
+                            <color key="tintColor" systemColor="tintColor"/>
+                            <inset key="contentEdgeInsets" minX="16" minY="10" maxX="16" maxY="16"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Reload All"/>
+                            <connections>
+                                <action selector="actionReloadAll:" destination="-1" eventType="touchUpInside" id="g2A-3J-8dx"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="bqu-zF-iIV"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="bqu-zF-iIV" firstAttribute="bottom" secondItem="ZIb-W4-NEt" secondAttribute="bottom" id="BpC-P5-A47"/>
+                        <constraint firstItem="bqu-zF-iIV" firstAttribute="top" secondItem="ZIb-W4-NEt" secondAttribute="top" id="Buh-4Z-2tO"/>
+                        <constraint firstAttribute="trailing" secondItem="ZIb-W4-NEt" secondAttribute="trailing" id="NyF-oF-r1f"/>
+                        <constraint firstAttribute="bottom" secondItem="CvH-4v-gLk" secondAttribute="bottom" id="VZk-cT-L60"/>
+                        <constraint firstItem="CvH-4v-gLk" firstAttribute="top" secondItem="bqu-zF-iIV" secondAttribute="top" id="Vg8-dh-AHW"/>
+                        <constraint firstItem="CvH-4v-gLk" firstAttribute="leading" secondItem="oDE-KW-Dqp" secondAttribute="leading" id="ufj-Y9-puu"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vxo-Lv-zyD">
+                    <rect key="frame" x="0.0" y="103" width="393" height="689"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="NZb-Ym-W4g">
+                    <rect key="frame" x="0.0" y="792" width="393" height="26"/>
+                    <color key="pageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="currentPageIndicatorTintColor" name="AccentColor"/>
+                </pageControl>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NZb-Ym-W4g" secondAttribute="trailing" id="21H-YG-I4u"/>
+                <constraint firstItem="vxo-Lv-zyD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="73q-sK-b4e"/>
+                <constraint firstItem="NZb-Ym-W4g" firstAttribute="top" secondItem="vxo-Lv-zyD" secondAttribute="bottom" id="79L-TQ-wjX"/>
+                <constraint firstItem="vxo-Lv-zyD" firstAttribute="top" secondItem="oDE-KW-Dqp" secondAttribute="bottom" id="Pia-7M-7xS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vxo-Lv-zyD" secondAttribute="trailing" id="USa-Qp-dYm"/>
+                <constraint firstItem="NZb-Ym-W4g" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="epC-dZ-XsN"/>
+                <constraint firstItem="NZb-Ym-W4g" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ghf-oD-JWP"/>
+                <constraint firstItem="oDE-KW-Dqp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iW7-c0-2w5"/>
+                <constraint firstItem="oDE-KW-Dqp" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="nJm-uB-6Yb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="oDE-KW-Dqp" secondAttribute="top" id="sgk-iQ-lEc"/>
+            </constraints>
+            <point key="canvasLocation" x="-411.4503816793893" y="-55.633802816901408"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
