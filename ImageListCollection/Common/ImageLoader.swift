@@ -11,15 +11,16 @@ import UIKit
 let imageCache = NSCache<AnyObject, AnyObject>()
 
 class ImageLoader: UIImageView {
+    var id : Int = 0
 
     var imageURL: String?
 
     let activityIndicator = UIActivityIndicatorView()
 
-    func loadImageWithUrl(_ url: URL, completed : () -> Void = {}) {
+    func loadImageWithUrl(_ url: URL, completed : @escaping (String) -> Void = { _ in}) {
 
         // setup activityIndicator...
-        activityIndicator.color = .tintColor
+        activityIndicator.color = .systemBlue.withAlphaComponent(0.5)
 
         addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -45,18 +46,26 @@ class ImageLoader: UIImageView {
                 if let unwrappedData = data, let imageToCache = UIImage(data: unwrappedData), let url = response?.url {
                     self.image = imageToCache
                     self.imageURL = url.absoluteString
-                    imageCache.setObject(imageToCache, forKey: url.absoluteString as AnyObject)
+                    completed(url.absoluteString)
+                    imageCache.setObject(imageToCache, forKey: self.id as AnyObject)
                 }
                 self.activityIndicator.stopAnimating()
             })
         }).resume()
-        completed()
     }
     
-    func loadImageCache(_ url: String, placeholder: UIImage? = nil) {
+    func loadImageCache(_ url: String = "", placeholder: UIImage? = nil, id: Int? = nil) {
          //retrieves image if already available in cache
-        if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
+        if let idImage = id, let imageFromCache = imageCache.object(forKey: idImage as AnyObject) as? UIImage {
             self.image = imageFromCache
+        } else {
+            if  let url = URL(string: url) {
+                self.loadImageWithUrl(url)
+            } else {
+                if  let url = URL(string: .baseImageUrl) {
+                    self.loadImageWithUrl(url)
+                }
+            }
         }
     }
 }

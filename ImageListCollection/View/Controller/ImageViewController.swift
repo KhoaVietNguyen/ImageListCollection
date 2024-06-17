@@ -41,12 +41,11 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
         pageViewController.view.trailingAnchor.constraint(equalTo: self.pageView.trailingAnchor).isActive = true
         pageViewController.view.topAnchor.constraint(equalTo: self.btnReload.bottomAnchor).isActive = true
         pageViewController.view.bottomAnchor.constraint(equalTo: self.pageView.bottomAnchor).isActive = true
-        
     }
     
     func setupUI(){
         // setup activityIndicator...
-        self.activityIndicator.color = .white
+        self.activityIndicator.color = .systemBlue
         self.view.addSubview(self.activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
@@ -55,6 +54,10 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
         activityIndicator.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.activityIndicator.backgroundColor = .black.withAlphaComponent(0.6)
         self.activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        
+        //let rows = Int(floor((self.pageView.frame.height - Int.totalHorizontalSpacing) / (self.pageView.frame.width / CGFloat(Int.PAGE_COLUMN))))
+        //Int.PAGE_MAX_COUNT = rows * .PAGE_COLUMN
+        self.pageControl.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
     }
     
     func setupData(){
@@ -67,8 +70,12 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
         pageControl.currentPage = index
     }
     
+    @IBAction func actionPageController(_ sender: UIPageControl) {
+        let page: Int = sender.currentPage
+        self.pageViewController.setViewControllers([self.pageViewController.controllers[page]], direction: .forward, animated: false, completion: nil)
+    }
+    
     @IBAction func actionAdd(_ sender: Any) {
-        self.activityIndicator.startAnimating()
         self.viewModel.addNewData()
         if self.pageViewController.controllers.count < self.viewModel.pageNumber {
             //add new page
@@ -78,24 +85,20 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
             self.pageViewController.setViewControllers([self.pageViewController.controllers.last!], direction: .forward, animated: true, completion: nil)
         } else {
             //add new item
-            if self.viewModel.pageNumber - 1 != self.pageControl.currentPage {
+            if self.viewModel.pageNumber - 1 > self.pageControl.currentPage {
+                self.btnAdd.isUserInteractionEnabled = false
                 self.pageViewController.setViewControllers([self.pageViewController.controllers.last!], direction: .forward, animated: true, completion: { _ in
                     let vcPage : PageViewController = self.pageViewController.controllers.last! as! PageViewController
                     vcPage.data = self.viewModel.arrImagePerPage.last!
-                    vcPage.collectionView.insertItems(at: [IndexPath(row: vcPage.data.count - 1, section: 0)])
+                    self.btnAdd.isUserInteractionEnabled = true
                 })
             } else {
                 let vcPage : PageViewController = self.pageViewController.controllers.last! as! PageViewController
                 vcPage.data = self.viewModel.arrImagePerPage.last!
-                vcPage.collectionView.insertItems(at: [IndexPath(row: vcPage.data.count - 1, section: 0)])
             }
         }
         self.pageControl.numberOfPages = self.viewModel.pageNumber
         self.pageControl.currentPage = self.viewModel.pageNumber - 1
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1200)) {
-            self.activityIndicator.stopAnimating()
-        }
     }
         
     @IBAction func actionReloadAll(_ sender: Any) {
@@ -105,7 +108,7 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
         self.pageViewController.setViewControllers([UIViewController()], direction: .forward, animated: true, completion: nil)
         self.activityIndicator.startAnimating()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1200)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
             self.pageViewController.controllers.removeAll()
             self.viewModel.parseImageDatePerPage()
             for i in 0 ..< self.viewModel.pageNumber {
@@ -114,7 +117,7 @@ class ImageViewController: UIViewController, CustomPageViewControllerDelegate {
                 self.pageViewController.controllers.append(vc)
             }
             
-            self.pageViewController.setViewControllers([self.pageViewController.controllers.first!], direction: .reverse, animated: true, completion: { _ in
+            self.pageViewController.setViewControllers([self.pageViewController.controllers.first!], direction: .forward, animated: true, completion: { _ in
                 self.activityIndicator.stopAnimating()
                 self.pageControl.numberOfPages = self.viewModel.pageNumber
                 self.pageControl.currentPage = 0

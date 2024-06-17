@@ -29,6 +29,7 @@ class ImageViewModel: NSObject {
     func clearMockData() {
         arrImageDefault.removeAll()
         arrImagePerPage.removeAll()
+        imageCache.removeAllObjects()
         self.pageNumber = 0
     }
     
@@ -41,7 +42,7 @@ class ImageViewModel: NSObject {
         //get data per page
         let arr = self.arrImageDefault
         var arrParse: [[ImageModel]] = []
-        let maxCount = 70
+        let maxCount : Int = .PAGE_MAX_COUNT
         var i = 0
         while i < arr.count {
             let arrSub = (arr.count - i < maxCount ) ? Array(arr[i..<arr.count]) : Array(arr[i..<i+maxCount])

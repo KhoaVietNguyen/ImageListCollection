@@ -60,13 +60,16 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vxo-Lv-zyD">
-                    <rect key="frame" x="0.0" y="103" width="393" height="689"/>
+                    <rect key="frame" x="0.0" y="103" width="393" height="681"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
-                <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="NZb-Ym-W4g">
-                    <rect key="frame" x="0.0" y="792" width="393" height="26"/>
+                <pageControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="NZb-Ym-W4g">
+                    <rect key="frame" x="0.0" y="784" width="393" height="26"/>
                     <color key="pageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="currentPageIndicatorTintColor" name="AccentColor"/>
+                    <connections>
+                        <action selector="actionPageController:" destination="-1" eventType="valueChanged" id="3oO-i7-VDg"/>
+                    </connections>
                 </pageControl>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -77,7 +80,7 @@
                 <constraint firstItem="NZb-Ym-W4g" firstAttribute="top" secondItem="vxo-Lv-zyD" secondAttribute="bottom" id="79L-TQ-wjX"/>
                 <constraint firstItem="vxo-Lv-zyD" firstAttribute="top" secondItem="oDE-KW-Dqp" secondAttribute="bottom" id="Pia-7M-7xS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vxo-Lv-zyD" secondAttribute="trailing" id="USa-Qp-dYm"/>
-                <constraint firstItem="NZb-Ym-W4g" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="epC-dZ-XsN"/>
+                <constraint firstItem="NZb-Ym-W4g" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-8" id="epC-dZ-XsN"/>
                 <constraint firstItem="NZb-Ym-W4g" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ghf-oD-JWP"/>
                 <constraint firstItem="oDE-KW-Dqp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iW7-c0-2w5"/>
                 <constraint firstItem="oDE-KW-Dqp" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="nJm-uB-6Yb"/>

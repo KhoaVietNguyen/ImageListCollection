@@ -9,12 +9,15 @@ import Foundation
 import UIKit
 
 extension String {
-    static let baseImageUrl = "http://loremflickr.com/200/200/"
+    static let baseImageUrl = "http://loremflickr.com/200/200/dog"
 }
 
 extension Int {
     static let COUNT_ITEM_DEFAULT = 138
-    static let PAGE_MAX_COUNT = 70
+    static var PAGE_MAX_COUNT = 70
+    static let PAGE_COLUMN = 7
+    static let spacing: CGFloat = 2
+    static let totalHorizontalSpacing = CGFloat((PAGE_COLUMN - 1)) * spacing
 }
 
 extension UICollectionView {
